@@ -2,7 +2,7 @@ import React from 'react';
 import { Router as DefaultRouter, Route, Switch } from 'react-router-dom';
 import dynamic from 'umi/dynamic';
 import renderRoutes from 'umi/_renderRoutes';
-import RendererWrapper0 from '/Users/qfl/Desktop/项目/Ant Design Pro练手/Ant-Design-Pro-/my-project/src/pages/.umi/LocaleWrapper.jsx'
+import RendererWrapper0 from '/Users/qfl/Desktop/项目/Ant design_projecct/Ant-Design-Pro-/src/pages/.umi/LocaleWrapper.jsx'
 import _dvaDynamic from 'dva/dynamic'
 
 let Router = require('dva/router').routerRedux.ConnectedRouter;
@@ -13,7 +13,7 @@ let routes = [
     "component": _dvaDynamic({
   
   component: () => import(/* webpackChunkName: "layouts__UserLayout" */'../../layouts/UserLayout'),
-  LoadingComponent: require('/Users/qfl/Desktop/项目/Ant Design Pro练手/Ant-Design-Pro-/my-project/src/components/PageLoading/index').default,
+  LoadingComponent: require('/Users/qfl/Desktop/项目/Ant design_projecct/Ant-Design-Pro-/src/components/PageLoading/index').default,
 }),
     "routes": [
       {
@@ -27,12 +27,12 @@ let routes = [
         "component": _dvaDynamic({
   
   component: () => import(/* webpackChunkName: "p__Admin__LoginPage" */'../Admin/LoginPage'),
-  LoadingComponent: require('/Users/qfl/Desktop/项目/Ant Design Pro练手/Ant-Design-Pro-/my-project/src/components/PageLoading/index').default,
+  LoadingComponent: require('/Users/qfl/Desktop/项目/Ant design_projecct/Ant-Design-Pro-/src/components/PageLoading/index').default,
 }),
         "exact": true
       },
       {
-        "component": () => React.createElement(require('/Users/qfl/Desktop/项目/Ant Design Pro练手/Ant-Design-Pro-/my-project/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
+        "component": () => React.createElement(require('/Users/qfl/Desktop/项目/Ant design_projecct/Ant-Design-Pro-/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
       }
     ]
   },
@@ -41,7 +41,7 @@ let routes = [
     "component": _dvaDynamic({
   
   component: () => import(/* webpackChunkName: "layouts__BasicLayout" */'../../layouts/BasicLayout'),
-  LoadingComponent: require('/Users/qfl/Desktop/项目/Ant Design Pro练手/Ant-Design-Pro-/my-project/src/components/PageLoading/index').default,
+  LoadingComponent: require('/Users/qfl/Desktop/项目/Ant design_projecct/Ant-Design-Pro-/src/components/PageLoading/index').default,
 }),
     "Routes": [require('../Authorized').default],
     "authority": [
@@ -65,7 +65,7 @@ let routes = [
             "component": _dvaDynamic({
   
   component: () => import(/* webpackChunkName: "p__Product__Product" */'../Product/Product'),
-  LoadingComponent: require('/Users/qfl/Desktop/项目/Ant Design Pro练手/Ant-Design-Pro-/my-project/src/components/PageLoading/index').default,
+  LoadingComponent: require('/Users/qfl/Desktop/项目/Ant design_projecct/Ant-Design-Pro-/src/components/PageLoading/index').default,
 }),
             "exact": true
           },
@@ -76,12 +76,12 @@ let routes = [
             "component": _dvaDynamic({
   
   component: () => import(/* webpackChunkName: "p__Product__Productitem" */'../Product/Productitem'),
-  LoadingComponent: require('/Users/qfl/Desktop/项目/Ant Design Pro练手/Ant-Design-Pro-/my-project/src/components/PageLoading/index').default,
+  LoadingComponent: require('/Users/qfl/Desktop/项目/Ant design_projecct/Ant-Design-Pro-/src/components/PageLoading/index').default,
 }),
             "exact": true
           },
           {
-            "component": () => React.createElement(require('/Users/qfl/Desktop/项目/Ant Design Pro练手/Ant-Design-Pro-/my-project/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
+            "component": () => React.createElement(require('/Users/qfl/Desktop/项目/Ant design_projecct/Ant-Design-Pro-/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
           }
         ]
       },
@@ -92,7 +92,7 @@ let routes = [
         "component": _dvaDynamic({
   
   component: () => import(/* webpackChunkName: "p__Manage__Manage" */'../Manage/Manage'),
-  LoadingComponent: require('/Users/qfl/Desktop/项目/Ant Design Pro练手/Ant-Design-Pro-/my-project/src/components/PageLoading/index').default,
+  LoadingComponent: require('/Users/qfl/Desktop/项目/Ant design_projecct/Ant-Design-Pro-/src/components/PageLoading/index').default,
 }),
         "exact": true
       },
@@ -103,17 +103,17 @@ let routes = [
         "component": _dvaDynamic({
   
   component: () => import(/* webpackChunkName: "p__Carousel__Carousel" */'../Carousel/Carousel'),
-  LoadingComponent: require('/Users/qfl/Desktop/项目/Ant Design Pro练手/Ant-Design-Pro-/my-project/src/components/PageLoading/index').default,
+  LoadingComponent: require('/Users/qfl/Desktop/项目/Ant design_projecct/Ant-Design-Pro-/src/components/PageLoading/index').default,
 }),
         "exact": true
       },
       {
-        "component": () => React.createElement(require('/Users/qfl/Desktop/项目/Ant Design Pro练手/Ant-Design-Pro-/my-project/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
+        "component": () => React.createElement(require('/Users/qfl/Desktop/项目/Ant design_projecct/Ant-Design-Pro-/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
       }
     ]
   },
   {
-    "component": () => React.createElement(require('/Users/qfl/Desktop/项目/Ant Design Pro练手/Ant-Design-Pro-/my-project/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
+    "component": () => React.createElement(require('/Users/qfl/Desktop/项目/Ant design_projecct/Ant-Design-Pro-/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
   }
 ];
 window.g_routes = routes;

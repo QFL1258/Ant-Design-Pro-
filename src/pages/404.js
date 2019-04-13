@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'umi/link';
 import { formatMessage } from 'umi-plugin-react/locale';
 import Exception from '@/components/Exception';
-
+// 错误
 export default () => (
   <Exception
     type="404"

@@ -29,7 +29,10 @@
     "test:all": "node ./tests/run-tests.js",
     "test:component": "umi test ./src/components",
     "tslint": "npm run tslint:fix",
-    "tslint:fix": "tslint --fix 'src/**/*.ts*'"
+    "tslint:fix": "tslint --fix 'src/**/*.ts*'",
+    
+    "precommit": "webpack  --config ./web/webpack.config.js",
+    "...": "..."
   },
   "husky": {
     "hooks": {
