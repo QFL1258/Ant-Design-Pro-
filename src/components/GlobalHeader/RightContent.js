@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { FormattedMessage, formatMessage } from 'umi-plugin-react/locale';
-import { Spin, Tag, Menu, Icon, Avatar, Tooltip, message } from 'antd';
+import { Spin, Tag, Menu, Icon, Avatar, Tooltip, message,Dropdown } from 'antd';
 import moment from 'moment';
 import groupBy from 'lodash/groupBy';
 import NoticeIcon from '../NoticeIcon';
@@ -72,9 +72,10 @@ export default class GlobalHeaderRight extends PureComponent {
       onNoticeClear,
       theme,
     } = this.props;
+    //右上角
     const menu = (
       <Menu className={styles.menu} selectedKeys={[]} onClick={onMenuClick}>
-        <Menu.Item key="userCenter">
+        {/* <Menu.Item key="userCenter">
           <Icon type="user" />
           <FormattedMessage id="menu.account.center" defaultMessage="account center" />
         </Menu.Item>
@@ -86,7 +87,7 @@ export default class GlobalHeaderRight extends PureComponent {
           <Icon type="close-circle" />
           <FormattedMessage id="menu.account.trigger" defaultMessage="Trigger Error" />
         </Menu.Item>
-        <Menu.Divider />
+        <Menu.Divider /> */}
         <Menu.Item key="logout">
           <Icon type="logout" />
           <FormattedMessage id="menu.account.logout" defaultMessage="logout" />
@@ -175,7 +176,7 @@ export default class GlobalHeaderRight extends PureComponent {
             showViewMore
           />
         </NoticeIcon> */}
-        {currentUser.name ? (
+        {/* {currentUser.name ? (
           <HeaderDropdown overlay={menu}>
             <span className={`${styles.action} ${styles.account}`}>
               <Avatar
@@ -187,6 +188,18 @@ export default class GlobalHeaderRight extends PureComponent {
               <span className={styles.name}>{currentUser.name}</span>
             </span>
           </HeaderDropdown>
+        ) : (
+          <Spin size="small" style={{ marginLeft: 8, marginRight: 8 }} />
+        )} */}
+        {/* 语言 */}
+        {/* <SelectLang className={styles.action} /> */}
+         {currentUser ? (
+          <Dropdown overlay={menu}>
+            <span className={`${styles.action} ${styles.account}`}>
+              <Icon type="user" style={{ fontSize: '16px', marginBottom: '6px' }} />
+              <span className={styles.name}>{currentUser}</span>
+            </span>
+          </Dropdown>
         ) : (
           <Spin size="small" style={{ marginLeft: 8, marginRight: 8 }} />
         )}

@@ -63,7 +63,33 @@ export default {
 
 
     },
+    //  退出登录
+    *logout(_, { put }) {
+      yield put({
+        type: 'saveAccountInfo',
+        payload: {
+          currentUser: undefined,
+          currentAuthority: [],
+        },
+      });
+      yield put({
+        type: 'saveMessage',
+        payload: {
+          message: undefined,
+        },
+      });
+      reloadAuthorized();
+      yield put(
+        routerRedux.push({
+          pathname: '/login/login',
+          search: stringify({
+            redirect: window.location.href,
+          }),
+        })
+      );
+    },
   },
+  
 
   reducers: {
     //更改state里面的message

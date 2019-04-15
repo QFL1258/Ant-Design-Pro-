@@ -53,6 +53,10 @@ class EditableCell extends React.Component {
         return form.getFieldDecorator(dataIndex, {
           getValueFromEvent: this.normFile,
           initialValue: record[dataIndex],
+          rules: [{
+            required: true,
+            message: ` 请上传${this.props.title}!`,
+          }],
         })(
           <Upload name="file"
                   listType="picture-card"
@@ -95,7 +99,7 @@ class EditableCell extends React.Component {
           return form.getFieldDecorator(dataIndex,{
            rules: [{
              required: true,
-             message: `Please Input ${this.props.title}!`,
+             message: `请输入${this.props.title}!`,
            }],
            initialValue: record[dataIndex],
          })(<Input />)
@@ -142,7 +146,6 @@ class EditableCell extends React.Component {
     editList(row, key) {
       //row 要修改的参数 ，可以 record.id
       let params = { row, key };
-      console.log(params)
       dispatch({ type: 'carousel/updatecarousel', payload: params });
     },
     //添加信息
@@ -166,26 +169,14 @@ class Carousel extends React.Component{
       imgUrl2: '',
     };
     this.columns = [
-      {
-          title:'id',
-          dataIndex:'id',
-          editable:true,
+      {title:'id',dataIndex:'id',editable:false,},
+      {title:'封面图',dataIndex:'cover_img',editable:true,
+       render: cover_img => <img src={host_v1+JSON.parse(cover_img)[0]} alt="img" style={{ width: '34px' }} />,
       },
-      {
-          title:'封面图',
-          dataIndex:'cover_img',
-          editable:true,
-          render: cover_img => <img src={host_v1+cover_img} alt="img" style={{ width: '34px' }} />,
+      {title:'详情图',dataIndex:'content',editable:true,
+       render: content => <img src={host_v1+JSON.parse(content)[0]} alt="img" style={{ width: '34px' }} />,
       },
-      {
-          title:'详情图',
-          dataIndex:'content',
-          editable:true,
-          render: content => <img src={host_v1+JSON.parse(content)[0]} alt="img" style={{ width: '34px' }} />,
-      },
-      {
-          title: '操作',
-          dataIndex: 'operation',
+      {title: '操作',dataIndex: 'operation',
           render: (text, record,index) => {
             //判断是否可以修改
             const editable = this.isEditing(record);
@@ -297,6 +288,7 @@ class Carousel extends React.Component{
         });
       }
       fieldsValue.content =JSON.stringify(img_content);
+      fieldsValue.cover_img=JSON.stringify(img_cover_img)
         this.props.postProduct(fieldsValue);
         this.setState({visible: false,});
     });
@@ -322,7 +314,7 @@ class Carousel extends React.Component{
     };
     this.props.deleLists(deleOne, callback);
   }
-  //保存
+  //编辑
   save(form, key) {
     //获取参数
     form.validateFields((error, row) => {
@@ -343,7 +335,7 @@ class Carousel extends React.Component{
         });
       }
       row.content =JSON.stringify(img_content);
-      row.cover_img=img_cover_img;
+      row.cover_img=JSON.stringify(img_cover_img);
       const params = row;
       this.props.editList(params, key * 1);
       this.setState({ editingKey: '' });
@@ -434,7 +426,7 @@ class Carousel extends React.Component{
                       rules: [
                         {
                           required: true,
-                          message: 'Please input 封面图',
+                          message: '请上传封面图',
                         },
                       ],
                     })(
@@ -456,7 +448,7 @@ class Carousel extends React.Component{
                       rules: [
                         {
                           required: true,
-                          message: 'Please input 详细图',
+                          message: '请上传详细图',
                         },
                       ],
                     })(
@@ -475,7 +467,7 @@ class Carousel extends React.Component{
                       rules: [
                         {
                           required: true,
-                          message: 'Please input class_id',
+                          message: '请输入id',
                         },
                       ],
                     })(<Input placeholder="请输入" />)}

@@ -77,6 +77,7 @@ export default class SiderMenu extends PureComponent {
         theme={theme}
         className={siderClassName}
       >
+        {/* 侧边栏头部 */}
         <div className={styles.logo} id="logo">
           <Link to="/">
             <img src={logo} alt="logo" />

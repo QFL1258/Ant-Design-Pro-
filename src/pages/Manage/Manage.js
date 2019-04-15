@@ -174,7 +174,6 @@ class Manage extends React.Component{
   handleOk = (e) => {
     const {form} =this.props;
     form.validateFields((err, fieldsValue) => {
-      console.log(fieldsValue)
       if (err) return;
       const { cover_img, content } = fieldsValue;
       let img_content = [];

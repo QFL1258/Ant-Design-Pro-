@@ -40,7 +40,6 @@ export async function postProduct(params) {
 }
 //商品管理 编辑
 export async function saveitem(params){
-  console.log(params)
   let {row,key}=params;
   return request_new(`/api/put/production/${key}/`,{
     method:'PUT',
@@ -90,7 +89,6 @@ export async function delecarousel(params){
 }
 // 编辑轮播图片
 export async function updatecarousel(params){
-  console.log(params)
   let {row,key}=params;
   return request_new(`/api/put/carousel/${key}/`,{
     method:'PUT',

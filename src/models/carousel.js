@@ -35,7 +35,7 @@ export default {
         message.success('添加失败');
       }
     },
-     //商品管理 编辑商品
+     //编辑
     *updatecarousel({payload},{call,put,select}){
       const { list } = yield select(state => state.carousel);
       const {data}= yield call(updatecarousel, payload);
@@ -44,7 +44,7 @@ export default {
         yield put({ type: 'getInfo' });
       }
     },
-    //商品管理 删除商品
+    //删除
     *delecarousel({payload,callback},{call,put,select}){
       const {key} = payload
       yield delecarousel(state => state.carousel);

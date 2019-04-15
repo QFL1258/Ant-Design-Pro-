@@ -1,16 +1,15 @@
-import React, { Component } from 'react';
-import { formatMessage } from 'umi-plugin-react/locale';
-import { Layout, message } from 'antd';
+import React, { PureComponent } from 'react';
+import { Layout } from 'antd';
 import Animate from 'rc-animate';
 import { connect } from 'dva';
-import router from 'umi/router';
 import GlobalHeader from '@/components/GlobalHeader';
 import TopNavHeader from '@/components/TopNavHeader';
 import styles from './Header.less';
+import Authorized from '@/utils/Authorized';
 
 const { Header } = Layout;
 
-class HeaderView extends Component {
+class HeaderView extends PureComponent {
   state = {
     visible: true,
   };
@@ -41,33 +40,8 @@ class HeaderView extends Component {
     return collapsed ? 'calc(100% - 80px)' : 'calc(100% - 256px)';
   };
 
-  handleNoticeClear = type => {
-    message.success(
-      `${formatMessage({ id: 'component.noticeIcon.cleared' })} ${formatMessage({
-        id: `component.globalHeader.${type}`,
-      })}`
-    );
-    const { dispatch } = this.props;
-    dispatch({
-      type: 'global/clearNotices',
-      payload: type,
-    });
-  };
-
   handleMenuClick = ({ key }) => {
     const { dispatch } = this.props;
-    if (key === 'userCenter') {
-      router.push('/account/center');
-      return;
-    }
-    if (key === 'triggerError') {
-      router.push('/exception/trigger');
-      return;
-    }
-    if (key === 'userinfo') {
-      router.push('/account/settings/base');
-      return;
-    }
     if (key === 'logout') {
       dispatch({
         type: 'login/logout',
@@ -79,7 +53,7 @@ class HeaderView extends Component {
     if (visible) {
       const { dispatch } = this.props;
       dispatch({
-        type: 'global/fetchNotices',
+        type: '',
       });
     }
   };
@@ -92,17 +66,20 @@ class HeaderView extends Component {
     }
     const scrollTop = document.body.scrollTop + document.documentElement.scrollTop;
     if (!this.ticking) {
-      this.ticking = true;
       requestAnimationFrame(() => {
         if (this.oldScrollTop > scrollTop) {
           this.setState({
             visible: true,
           });
-        } else if (scrollTop > 300 && visible) {
+          this.scrollTop = scrollTop;
+          return;
+        }
+        if (scrollTop > 300 && visible) {
           this.setState({
             visible: false,
           });
-        } else if (scrollTop < 300 && !visible) {
+        }
+        if (scrollTop < 300 && !visible) {
           this.setState({
             visible: true,
           });
@@ -111,6 +88,7 @@ class HeaderView extends Component {
         this.ticking = false;
       });
     }
+    this.ticking = false;
   };
 
   render() {
@@ -120,26 +98,20 @@ class HeaderView extends Component {
     const isTop = layout === 'topmenu';
     const width = this.getHeadWidth();
     const HeaderDom = visible ? (
-      <Header
-        style={{ padding: 0, width, zIndex: 2 }}
-        className={fixedHeader ? styles.fixedHeader : ''}
-      >
+      <Header style={{ padding: 0, width }} className={fixedHeader ? styles.fixedHeader : ''}>
         {isTop && !isMobile ? (
           <TopNavHeader
             theme={navTheme}
             mode="horizontal"
+            Authorized={Authorized}
             onCollapse={handleMenuCollapse}
-            onNoticeClear={this.handleNoticeClear}
             onMenuClick={this.handleMenuClick}
-            onNoticeVisibleChange={this.handleNoticeVisibleChange}
             {...this.props}
           />
         ) : (
           <GlobalHeader
             onCollapse={handleMenuCollapse}
-            onNoticeClear={this.handleNoticeClear}
             onMenuClick={this.handleMenuClick}
-            onNoticeVisibleChange={this.handleNoticeVisibleChange}
             {...this.props}
           />
         )}
@@ -153,11 +125,8 @@ class HeaderView extends Component {
   }
 }
 
-export default connect(({ user, global, setting, loading }) => ({
-  currentUser: user.currentUser,
+export default connect(({ login, global, setting }) => ({
+  currentUser: login.currentUser,
   collapsed: global.collapsed,
-  fetchingMoreNotices: loading.effects['global/fetchMoreNotices'],
-  fetchingNotices: loading.effects['global/fetchNotices'],
-  notices: global.notices,
   setting,
 }))(HeaderView);

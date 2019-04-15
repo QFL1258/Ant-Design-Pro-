@@ -53,7 +53,7 @@ class EditableCell extends React.Component {
          return form.getFieldDecorator(dataIndex,{
           rules: [{
             required: true,
-            message: `Please Input ${this.props.title}!`,
+            message: `请输入 ${this.props.title}!`,
           }],
           initialValue: record[dataIndex],
         })(<Input />);
@@ -61,6 +61,10 @@ class EditableCell extends React.Component {
         return form.getFieldDecorator(dataIndex, {
           getValueFromEvent: this.normFile,
           initialValue: record[dataIndex],
+          rules: [{
+            required: true,
+            message: `请输入 ${this.props.title}!`,
+          }],
         })(
           <Upload name="file"
                   listType="picture-card"
@@ -79,7 +83,7 @@ class EditableCell extends React.Component {
         return form.getFieldDecorator(dataIndex,{
           rules: [{
             required: true,
-            message: `Please Input ${this.props.title}!`,
+            message: `请输入 ${this.props.title}!`,
           }],
           initialValue: record.cls.class_id,
         })(
@@ -104,7 +108,7 @@ class EditableCell extends React.Component {
           return form.getFieldDecorator(dataIndex,{
            rules: [{
              required: true,
-             message: `Please Input ${this.props.title}!`,
+             message: `请输入${this.props.title}!`,
            }],
            initialValue: record[dataIndex],
          })(<InputNumber />)
@@ -317,7 +321,7 @@ class Product extends React.Component{
     form.validateFields((err, fieldsValue) => {
       if (err) return;
       const { cover_img, content } = fieldsValue;
-      let img_content = [];
+      let img_content =[];
       let img_cover_img=[]
       if (Array.isArray(cover_img)) {
         fieldsValue.cover_img = cover_img[cover_img.length - 1].response.substr(1);
@@ -468,7 +472,7 @@ class Product extends React.Component{
                       rules: [
                         {
                           required: true,
-                          message: 'Please input price',
+                          message: '请输入现价',
                         },
                       ],
                     })(<InputNumber placeholder="请输入" />)}
@@ -479,7 +483,7 @@ class Product extends React.Component{
                       rules: [
                         {
                           required: true,
-                          message: 'Please input old_price',
+                          message: '请输入原价',
                         },
                       ],
                     })(<InputNumber placeholder="请输入" />)}
@@ -490,7 +494,7 @@ class Product extends React.Component{
                       rules: [
                         {
                           required: true,
-                          message: 'Please input 库存',
+                          message: '请输入库存',
                         },
                       ],
                     })(<Input placeholder="请输入" />)}
@@ -501,7 +505,7 @@ class Product extends React.Component{
                       rules: [
                         {
                           required: true,
-                          message: 'Please input 名称',
+                          message: '请输入名称',
                         },
                       ],
                     })(<Input placeholder="请输入" />)}
@@ -513,7 +517,7 @@ class Product extends React.Component{
                       rules: [
                         {
                           required: true,
-                          message: 'Please input 封面图',
+                          message: '请上传封面图',
                         },
                       ],
                     })(
@@ -535,7 +539,7 @@ class Product extends React.Component{
                       rules: [
                         {
                           required: true,
-                          message: 'Please input 详细图',
+                          message: '请上传详细图',
                         },
                       ],
                     })(
@@ -554,7 +558,7 @@ class Product extends React.Component{
                       rules: [
                         {
                           required: true,
-                          message: 'Please input class_id',
+                          message: '请输入id',
                         },
                       ],
                     })(<Input placeholder="请输入" />)}

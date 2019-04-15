@@ -291,7 +291,7 @@ class Product extends React.Component{
                           //是否必填
                           required: true,
                           //校验文案
-                          message: 'Please input  name',
+                          message: '请输入分类名',
                         },
                       ],
                     })(<Input placeholder="请输入" />)}

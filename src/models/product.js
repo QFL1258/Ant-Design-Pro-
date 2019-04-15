@@ -49,7 +49,6 @@ export default {
     //商品管理获取
     *getProduct(_,{call,put}){
       const {data} =yield call(getproduct)
-      console.log(data)
       yield put({
         type:'saveProduct',payload:data
       })
