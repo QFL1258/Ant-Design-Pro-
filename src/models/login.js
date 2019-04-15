@@ -32,9 +32,12 @@ export default {
         //当用户名是admin时保存token
         // saveLocalToken(token);
         // const { data: { currentAuthority } } = yield call();
+        // const { is_super } = res;
+        // let authority = is_super ? ['superAdmin', 'admin'] : ['admin'];
         yield put({
           type: 'saveAccountInfo',
           payload: {
+            // currentAuthority:authority,
             currentAuthority:currentAuthority,
             currentUser: currentUser,
           },

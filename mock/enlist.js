@@ -41,7 +41,7 @@ export default {
       });
       return;
     }
-    if (passWord === '2' && userName === 'user') {
+    if (passWord === '1' && userName === 'user') {
       res.send({
         status: 'ok',
         currentUser:'user',

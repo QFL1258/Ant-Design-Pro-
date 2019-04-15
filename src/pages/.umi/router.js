@@ -45,7 +45,8 @@ let routes = [
 }),
     "Routes": [require('../Authorized').default],
     "authority": [
-      "admin"
+      "admin",
+      "user"
     ],
     "routes": [
       {
@@ -103,6 +104,20 @@ let routes = [
         "component": _dvaDynamic({
   
   component: () => import(/* webpackChunkName: "p__Carousel__Carousel" */'../Carousel/Carousel'),
+  LoadingComponent: require('/Users/qfl/Desktop/项目/Ant design_projecct/Ant-Design-Pro-/src/components/PageLoading/index').default,
+}),
+        "exact": true
+      },
+      {
+        "path": "/administrator",
+        "name": "administrator",
+        "icon": "user-add",
+        "authority": [
+          "admin"
+        ],
+        "component": _dvaDynamic({
+  
+  component: () => import(/* webpackChunkName: "p__Administrator__page" */'../Administrator/page'),
   LoadingComponent: require('/Users/qfl/Desktop/项目/Ant design_projecct/Ant-Design-Pro-/src/components/PageLoading/index').default,
 }),
         "exact": true

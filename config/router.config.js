@@ -13,7 +13,7 @@ export default [
     path:'/',
     component:'../layouts/BasicLayout',
     Routes: ['src/pages/Authorized'],
-    authority: ['admin'],
+    authority: ['admin','user'],
     routes:[
       {path:'/',redirect:'/product/product'},
       //商品
@@ -49,6 +49,14 @@ export default [
         name:'carousel',
         icon:'sync',
         component:'./Carousel/Carousel'
+      },
+      //管理员
+      {
+        path:'/administrator',
+        name:'administrator',
+        icon:'user-add',
+        authority: ['admin'],
+        component:'./Administrator/page'
       }
     ]
   }

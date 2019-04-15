@@ -1,5 +1,15 @@
 import request_new from '@/utils/request_new';
 
+
+//登录
+
+// export async function postAccount(params) {
+//   return request(`${host}/api/admin/login/`, {
+//     method: 'POST',
+//     body: params,
+//   });
+// }
+
 //商品分类 获取数据
 export async function product(){
   return request_new (`/api/add/get/procls/`)
@@ -94,5 +104,40 @@ export async function updatecarousel(params){
     method:'PUT',
     //body:row 要修改的参数
     body:row,
+  })
+}
+
+//管理员 添加
+export async function postAdmin(params) {
+  return request_new(`/api/add/admin/`, {
+    method: 'POST',
+    body: params,
+  });
+}
+//获取管理员信息
+export async function getAdmin(){
+  return request_new (`/api/get/all/admins/`)
+}
+//设置超级管理员
+export async function setSuper({ id, is_super }) {
+  is_super = is_super === 1 ? 0 : 1;
+  return request_new(`/api/set/admin/manager/${id}/`, {
+  });
+}
+
+// 管理员 编辑
+export async function compile(params){
+  let {row,key}=params;
+  return request_new(`/api/put/admin/${key}/`,{
+    method:'PUT',
+    //body:row 要修改的参数
+    body:row,
+  })
+}
+
+// 删除 管理员
+export async function deleAdmin(params){
+  return request_new(`/api/del/admin/${params}/`,{
+    method:'delete',
   })
 }

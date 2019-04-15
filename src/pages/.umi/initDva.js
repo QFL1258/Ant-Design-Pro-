@@ -14,6 +14,7 @@ app.use(createLoading());
   app.use(plugin);
 });
 
+app.model({ namespace: 'administrator', ...(require('/Users/qfl/Desktop/项目/Ant design_projecct/Ant-Design-Pro-/src/models/administrator.js').default) });
 app.model({ namespace: 'carousel', ...(require('/Users/qfl/Desktop/项目/Ant design_projecct/Ant-Design-Pro-/src/models/carousel.js').default) });
 app.model({ namespace: 'global', ...(require('/Users/qfl/Desktop/项目/Ant design_projecct/Ant-Design-Pro-/src/models/global.js').default) });
 app.model({ namespace: 'login', ...(require('/Users/qfl/Desktop/项目/Ant design_projecct/Ant-Design-Pro-/src/models/login.js').default) });
