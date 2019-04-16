@@ -53,9 +53,9 @@ class LoginPage extends Component{
         >
           <div>
             {login.message !== undefined && !submitting && this.renderMessage(login.message)}
-            <UserName name="userName" placeholder="用户名" />
+            <UserName name="account" placeholder="用户名" />
             <Password
-              name="passWord"
+              name="pwd"
               placeholder="密码"
               onPressEnter={() => this.loginForm.validateFields(this.handleSubmit)}
             />

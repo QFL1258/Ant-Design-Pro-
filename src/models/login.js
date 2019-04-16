@@ -1,7 +1,8 @@
 //routerRedux 路由跳转
 import { routerRedux } from 'dva/router';
 //引入api接口
-import { enlist} from '@/services/api';
+import {postAccount} from '@/services/api_2';
+import {enlist} from '@/services/api';
 //引入公共组件
 import { getPageQuery } from '@/utils/utils';
 //引入公共组件
@@ -22,23 +23,21 @@ export default {
   effects: {
     //登录
     *login({ payload }, { call, put }) {
-      const res = yield call(enlist,payload)
+      // const {data} = yield call(postAccount,payload)
+      const res= yield call(enlist,payload)
       //从res 里面结构出数据中有的message
-      const { message,token,currentAuthority,currentUser} = res;
-      if(message){
-        //当有message时发送一个action到reducers中对state进行修改
-        yield put({ type: 'saveMessage', payload: { message } });
-      }else{
+   const { message,token,currentAuthority,currentUser} = res;
         //当用户名是admin时保存token
         // saveLocalToken(token);
         // const { data: { currentAuthority } } = yield call();
-        // const { is_super } = res;
+        // const { is_super } = data;
+        // console.log(is_super)
         // let authority = is_super ? ['superAdmin', 'admin'] : ['admin'];
         yield put({
           type: 'saveAccountInfo',
           payload: {
-            // currentAuthority:authority,
             currentAuthority:currentAuthority,
+            // currentAuthority:authority,
             currentUser: currentUser,
           },
         });
@@ -62,7 +61,7 @@ export default {
           }
           yield put(routerRedux.replace(redirect || '/'));
         }
-      }
+      
 
 
     },

@@ -31,8 +31,8 @@ const selectList=[
 export default {
   //登录
   'POST /api/login': (req, res) => {
-    const { passWord, userName} = req.body;
-    if (passWord === '1' && userName === 'admin') {
+    const { pwd, account} = req.body;
+    if (pwd === '1' && account === 'admin') {
       res.send({
         status: 'ok',
         currentAuthority: 'admin',
@@ -41,7 +41,7 @@ export default {
       });
       return;
     }
-    if (passWord === '1' && userName === 'user') {
+    if (pwd === '1' && account === 'user') {
       res.send({
         status: 'ok',
         currentUser:'user',

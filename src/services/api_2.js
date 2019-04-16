@@ -3,12 +3,12 @@ import request_new from '@/utils/request_new';
 
 //登录
 
-// export async function postAccount(params) {
-//   return request(`${host}/api/admin/login/`, {
-//     method: 'POST',
-//     body: params,
-//   });
-// }
+export async function postAccount(params) {
+  return request_new(`/api/admin/login/`, {
+    method: 'POST',
+    body: params,
+  });
+}
 
 //商品分类 获取数据
 export async function product(){
@@ -140,4 +140,18 @@ export async function deleAdmin(params){
   return request_new(`/api/del/admin/${params}/`,{
     method:'delete',
   })
+}
+
+//订单管理
+//获取订单信息
+export async function getOrder(){
+  return request_new (`/api/get/add/orders/`)
+}
+
+//订单状态
+export async function condition({ order_id ,is_send}) {
+  //  is_send = is_send === 1 ? 0 : 1;
+  // console.log(is_send)
+  return request_new(`/api/order/send/${order_id}`, {
+  });
 }

@@ -45,8 +45,7 @@ let routes = [
 }),
     "Routes": [require('../Authorized').default],
     "authority": [
-      "admin",
-      "user"
+      "admin"
     ],
     "routes": [
       {
@@ -104,6 +103,17 @@ let routes = [
         "component": _dvaDynamic({
   
   component: () => import(/* webpackChunkName: "p__Carousel__Carousel" */'../Carousel/Carousel'),
+  LoadingComponent: require('/Users/qfl/Desktop/项目/Ant design_projecct/Ant-Design-Pro-/src/components/PageLoading/index').default,
+}),
+        "exact": true
+      },
+      {
+        "path": "/orderman",
+        "name": "orderman",
+        "icon": "database",
+        "component": _dvaDynamic({
+  
+  component: () => import(/* webpackChunkName: "p__Orderman__page" */'../Orderman/page'),
   LoadingComponent: require('/Users/qfl/Desktop/项目/Ant design_projecct/Ant-Design-Pro-/src/components/PageLoading/index').default,
 }),
         "exact": true

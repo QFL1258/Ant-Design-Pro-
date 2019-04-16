@@ -13,7 +13,7 @@ export default [
     path:'/',
     component:'../layouts/BasicLayout',
     Routes: ['src/pages/Authorized'],
-    authority: ['admin','user'],
+    authority:['admin'],
     routes:[
       {path:'/',redirect:'/product/product'},
       //商品
@@ -50,11 +50,19 @@ export default [
         icon:'sync',
         component:'./Carousel/Carousel'
       },
+      //订单管理
+      {
+        path:'/orderman',
+        name:'orderman',
+        icon:'database',
+        component:'./Orderman/page'
+      },
       //管理员
       {
         path:'/administrator',
         name:'administrator',
         icon:'user-add',
+        // authority: ['superAdmin'],
         authority: ['admin'],
         component:'./Administrator/page'
       }

@@ -8,16 +8,18 @@ export default {
   'menu.personal.personalitem':'个人信息',
   'menu.personal.personalitem_1':'表格',
 
-   //商品语言
+    //商品语言
    'menu.product':'商品',
    'menu.product.classification':'商品分类',
    'menu.product.productitem':'商品管理',
-   //员工管理
+    //员工管理
    'menu.management':'员工管理',
-     //员工管理
+    //员工管理
    'menu.carousel':'轮播信息',
     //管理员
    'menu.administrator':'管理员',
+    //订单管理
+    'menu.orderman':'订单管理',
 
   'menu.dashboard': 'Dashboard',
   'menu.dashboard.analysis': '分析页',
