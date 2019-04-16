@@ -5,9 +5,6 @@ import {
   Table, Input, Popconfirm,Form,Button,Divider,Card,
   Select,Modal,Row,Col,Upload,Icon,InputNumber
 } from 'antd';
-import { host_v1, UploadURL} from '../../constants';
-
-
 
 const FormItem = Form.Item;
 const EditableContext = React.createContext();
@@ -64,14 +61,11 @@ class EditableCell extends React.Component {
   }),
   dispatch =>({
 
-    //推荐
+    //发货状态
     changeRecommend(data) {
       dispatch({ type: 'orderman/condition', payload: data });
     },
-    //上架 下架
-    changeShift(data) {
-      dispatch({ type: 'products/changeShift', payload: data });
-    },
+
   })
 )
 
@@ -161,7 +155,7 @@ class Orderman extends React.Component{
     this.props.changeRecommend({ order_id,is_send:is_send});
   };
   //isEditing = this.state.editingKey=record.id
-  isEditing = record => record.id === this.state.editingKey;
+  isEditing = record => record.order_id === this.state.editingKey;
   //点击编辑按钮后 对state里的editingKey 进行修改 editingKey=record.id
   edit(key) {
     this.setState({ editingKey: key });
@@ -190,37 +184,12 @@ class Orderman extends React.Component{
         //设置单元格属性
         onCell: record => ({
           record,
-          inputType:col.dataIndex === 'cover_img' || col.dataIndex === 'content' ? 'image' : 'text',
           dataIndex: col.dataIndex,
           title: col.title,
           editing: this.isEditing(record),
         }),
       };
     });
-    //上传按钮
-    const uploadButton = (
-      <div>
-        <Icon type="plus" />
-        <div className="ant-upload-text">Upload</div>
-      </div>
-    );
-
-
-
-    //点击按钮后输入框的布局
-    const formItemLayout = {
-      //label 标签布局
-      labelCol: {
-        xs: { span: 24 },
-        sm: { span: 7 },
-      },
-      //需要为输入控件设置布局样式时
-      wrapperCol: {
-        xs: { span: 24 },
-        sm: { span: 12 },
-        md: { span: 10 },
-      },
-    };
 
     return (
       <PageHeaderWrapper>

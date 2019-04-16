@@ -123,7 +123,7 @@ let routes = [
         "name": "administrator",
         "icon": "user-add",
         "authority": [
-          "admin"
+          "superAdmin"
         ],
         "component": _dvaDynamic({
   

@@ -21,7 +21,6 @@ export default {
     //获取
     *getInfo(_,{call,put}){
       let {data}=yield call(getOrder)
-      console.log(data)
       yield put ({
         type:'saveInfo',payload:data
       })

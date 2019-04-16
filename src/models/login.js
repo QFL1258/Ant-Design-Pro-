@@ -2,7 +2,6 @@
 import { routerRedux } from 'dva/router';
 //引入api接口
 import {postAccount} from '@/services/api_2';
-import {enlist} from '@/services/api';
 //引入公共组件
 import { getPageQuery } from '@/utils/utils';
 //引入公共组件
@@ -23,26 +22,24 @@ export default {
   effects: {
     //登录
     *login({ payload }, { call, put }) {
-      // const {data} = yield call(postAccount,payload)
-      const res= yield call(enlist,payload)
-      //从res 里面结构出数据中有的message
-   const { message,token,currentAuthority,currentUser} = res;
-        //当用户名是admin时保存token
-        // saveLocalToken(token);
-        // const { data: { currentAuthority } } = yield call();
-        // const { is_super } = data;
-        // console.log(is_super)
-        // let authority = is_super ? ['superAdmin', 'admin'] : ['admin'];
-        yield put({
-          type: 'saveAccountInfo',
-          payload: {
-            currentAuthority:currentAuthority,
-            // currentAuthority:authority,
-            currentUser: currentUser,
-          },
-        });
-        //如果权限信息正确，则跳转到/
-        if(currentAuthority){
+      const res = yield call(postAccount,payload)
+      const { data } = res;
+      if(data=="err"){
+        yield put({ type: 'saveMessage', payload: { message: "账号或密码错误" } });
+        return;
+      }else{
+      const {is_super}=data
+      let authority = is_super ? ['superAdmin', 'admin'] : ['admin'];
+      yield put({
+        type: 'saveAccountInfo',
+        payload: {
+          // currentAuthority:currentAuthority,
+          currentAuthority:authority,
+          currentUser: payload.account,
+        },
+      });
+      //如果权限信息正确，则跳转到/
+        if(authority){
           reloadAuthorized();
           const urlParams = new URL(window.location.href);
           const params = getPageQuery();
@@ -61,9 +58,7 @@ export default {
           }
           yield put(routerRedux.replace(redirect || '/'));
         }
-      
-
-
+      }
     },
     //  退出登录
     *logout(_, { put }) {
@@ -106,7 +101,6 @@ export default {
     saveAccountInfo(state,{payload}){
       //从payload中解构出权限信息和用户名
       const {currentAuthority,currentUser} =payload
-
       return {
         ...state,
         currentAuthority,

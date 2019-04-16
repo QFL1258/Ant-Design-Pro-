@@ -192,7 +192,7 @@ class Administrator extends React.Component{
                           onClick={() => this.changeRecommend(record)}
                           // style={{ margin: '5px 5px' }}
                                 >
-                          {record.is_super === 1 ? '设置超级管理员' : '取消超级管理员'}
+                          {record.is_super === 1 ? '取消超级管理员' : '设置超级管理员'}
                         </Button>
                     </span>
                 )}

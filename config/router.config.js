@@ -13,7 +13,7 @@ export default [
     path:'/',
     component:'../layouts/BasicLayout',
     Routes: ['src/pages/Authorized'],
-    authority:['admin'],
+    authority:['admin'] ,
     routes:[
       {path:'/',redirect:'/product/product'},
       //商品
@@ -62,8 +62,7 @@ export default [
         path:'/administrator',
         name:'administrator',
         icon:'user-add',
-        // authority: ['superAdmin'],
-        authority: ['admin'],
+        authority: ['superAdmin'],
         component:'./Administrator/page'
       }
     ]
