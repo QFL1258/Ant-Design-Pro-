@@ -142,6 +142,7 @@ class BasicLayout extends React.Component {
         </Layout>
       </Layout>
     );
+    
     return (
       <React.Fragment>
         <DocumentTitle title={getPageTitle(pathname, breadcrumbNameMap)}>
