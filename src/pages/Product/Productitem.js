@@ -3,7 +3,7 @@ import { connect } from 'dva';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import {
   Table, Input, Popconfirm,Form,Button,Divider,Card,
-  Select,Modal,Row,Col,Upload,Icon,InputNumber
+  Select,Modal,Row,Col,Upload,Icon,InputNumber,message
 } from 'antd';
 import { host_v1, UploadURL} from '../../constants';
 
@@ -318,24 +318,37 @@ class Product extends React.Component{
   //添加 点击模态框确定的回调 
   handleOk = (e) => {
     const {form} =this.props;
+    const {list} =this.props.product
+    let listid=[]
+    list.filter((item)=>{
+          return  listid.push(item.id)
+    })
+  
     form.validateFields((err, fieldsValue) => {
       if (err) return;
-      const { cover_img, content } = fieldsValue;
-      let img_content =[];
-      let img_cover_img=[]
-      if (Array.isArray(cover_img)) {
-        fieldsValue.cover_img = cover_img[cover_img.length - 1].response.substr(1);
-        img_cover_img.push(fieldsValue.cover_img)
-      }
-      if (Array.isArray(content)) {
-        content.forEach(itm => {
-          img_content.push(itm.response.substr(1));
-        });
-      }
-      fieldsValue.content =JSON.stringify(img_content);
-      fieldsValue.cover_img=JSON.stringify(img_cover_img);
+      const {cover_img, content,class_id } = fieldsValue;
+      if(listid.includes(class_id*1)){
+        let img_content =[];
+        let img_cover_img=[]
+        if (Array.isArray(cover_img)) {
+          fieldsValue.cover_img = cover_img[cover_img.length - 1].response.substr(1);
+          img_cover_img.push(fieldsValue.cover_img)
+        }
+        if (Array.isArray(content)) {
+          content.forEach(itm => {
+            img_content.push(itm.response.substr(1));
+          });
+        }
+        fieldsValue.content =JSON.stringify(img_content);
+        fieldsValue.cover_img=JSON.stringify(img_cover_img);
         this.props.postProduct(fieldsValue);
         this.setState({visible: false,});
+      }else{
+        return (
+          message.info('商品分类ID不存在')
+        )
+      }
+
     });
   }
 
@@ -500,7 +513,7 @@ class Product extends React.Component{
                     })(<Input placeholder="请输入" />)}
                   </FormItem>
                   {/* title */}
-                  <FormItem {...formItemLayout} label="名称">
+                  <FormItem {...formItemLayout} label="商品名">
                     {form.getFieldDecorator('title', {
                       rules: [
                         {
@@ -553,15 +566,15 @@ class Product extends React.Component{
                     )}
                   </FormItem>
                   {/* class_id */}
-                  <FormItem {...formItemLayout} label="id">
+                  <FormItem {...formItemLayout} label='商品分类ID'>
                     {form.getFieldDecorator('class_id', {
                       rules: [
                         {
                           required: true,
-                          message: '请输入id',
+                          message: '请输入商品分类ID',
                         },
                       ],
-                    })(<Input placeholder="请输入" />)}
+                    })(<Input placeholder="请输入商品分类ID" />)}
                   </FormItem>
                 </Form>
             </Modal>

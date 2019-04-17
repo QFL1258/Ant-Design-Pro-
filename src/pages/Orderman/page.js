@@ -129,7 +129,7 @@ class Orderman extends React.Component{
       },
       {
         title: '是否发货',
-        render: record => <span>{record.is_send? '已收货' : '未发货'}</span>,
+        render: record => <span>{record.is_send? '已发货' : '未发货'}</span>,
       },
       {
           title: '操作',

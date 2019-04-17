@@ -21,7 +21,7 @@ export default {
   effects: {
     //获取商品分类
     *getInfo(_,{call,put}){
-      let {data}=yield call(product)
+      let { data }=yield call(product)
       yield put ({
         type:'saveInfo',payload:data
       })

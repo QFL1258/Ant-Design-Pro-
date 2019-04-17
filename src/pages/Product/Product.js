@@ -3,9 +3,10 @@ import { connect } from 'dva';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import {
   Table, Input, Popconfirm,Form,Button,Divider,Card,
-  Select,Modal,Row,Col,Upload,Icon
+  Select,Modal,Row,Col,Upload,Icon, message
 } from 'antd';
 
+import services from '@/services/api_2.js';
 
 const FormItem = Form.Item;
 const EditableContext = React.createContext();
@@ -18,13 +19,16 @@ const EditableRow = ({ form, index, ...props }) => (
   );
 const EditableFormRow = Form.create()(EditableRow);
 
-@connect(
-  ({ product }) => ({
-    product
-  }),
-  dispatch =>({
-  })
-)
+// @connect(
+//   ({ product }) => ({
+//     product
+//   }),
+//   dispatch =>({
+//     query() {
+//       dispatch({type: 'getInfo'})
+//     }
+//   })
+// )
 
 //单元格组件
 class EditableCell extends React.Component {
@@ -87,6 +91,7 @@ class EditableCell extends React.Component {
         callback
       })
     },
+   
   })
 )
 
@@ -99,6 +104,7 @@ class Product extends React.Component{
       visible:false,
       selectedRows: [],
     };
+   
     this.columns = [
       {
 
@@ -158,6 +164,7 @@ class Product extends React.Component{
       },
     ];
   }
+
   showModal = () => {
     this.setState({
       visible: true,
@@ -167,14 +174,26 @@ class Product extends React.Component{
   //添加 点击模态框确定的回调 
   handleOk = (e) => {
     const {form} =this.props;
+    const {list} =this.props.product
+    let listname=[]
+     list.filter((item)=>{
+     return  listname.push(item.name)
+   })
+   
     form.validateFields((err, fieldsValue) => {
-      console.log(fieldsValue)
       if (err) return;
       const {name} = fieldsValue;
-      this.props.addProduct({ name:name});
+      if(listname.includes(name)){
+        return (
+          message.info('已经有这个分类了')
+        )
+      }else{
+        this.props.addProduct({ name:name});
         this.setState({
-        visible: false,
+          visible: false,
         });
+      }
+      
     });
   }
 
@@ -200,17 +219,29 @@ class Product extends React.Component{
   }
   //保存
   save(form, key) {
-    //经 Form.create() 包装过的组件会自带 this.props.form 属性 Form.create(options)
-    //校验并获取一组输入域的值与 Error，若 fieldNames 参数为空，则校验全部组件
-    //获取参数
+    const {list} =this.props.product
+      let listname=[]
+      list.filter((item)=>{
+      return  listname.push(item.name)
+    })
+
     form.validateFields((error, row) => {
       if (error) {
         return;
       }
-      const params = row;
-      //继承dispath中的 action 发送dispatch 通过action发送一个到后台
-      this.props.editList(params, key * 1);
-      this.setState({ editingKey: '' });
+      const {name} =row
+      if(listname.includes(name)){
+        return (
+          message.info('已经有这个分类了,编辑失败')
+        )
+      }else{
+        const params = row;
+        this.props.editList(params, key * 1);
+        message.info('保存成功')
+        this.setState({ editingKey: '' });
+      }
+
+
     });
       this.setState({ editingKey: '' });
   }

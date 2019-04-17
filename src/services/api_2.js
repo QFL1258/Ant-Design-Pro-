@@ -3,7 +3,6 @@ import request_new from '@/utils/request_new';
 
 //登录
 export async function postAccount(params) {
-  console.log(params)
   return request_new(`/api/admin/login/`, {
     method: 'POST',
     body: params,

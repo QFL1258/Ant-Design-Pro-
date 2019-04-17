@@ -19,6 +19,7 @@ export default {
   effects: {
     //获取轮播信息
     *getInfo(_,{call,put}){
+      // let {data}=yield call(getcarousel)
       let {data}=yield call(getcarousel)
       yield put ({
         type:'saveInfo',payload:data
@@ -72,7 +73,6 @@ export default {
   subscriptions: {
     setup({ history, dispatch }) {
       dispatch({type: 'getInfo'});
-      // dispatch({type:'getProduct'})
     },
   },
 };
