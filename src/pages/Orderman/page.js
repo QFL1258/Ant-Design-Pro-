@@ -3,8 +3,11 @@ import { connect } from 'dva';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import {
   Table, Input, Popconfirm,Form,Button,Divider,Card,
-  Select,Modal,Row,Col,Upload,Icon,InputNumber
+  Select,Modal,Row,Col,Upload,Icon,InputNumber,message
 } from 'antd';
+import { host_v1, UploadURL} from '../../constants';
+
+
 
 const FormItem = Form.Item;
 const EditableContext = React.createContext();
@@ -18,8 +21,8 @@ const EditableRow = ({ form, index, ...props }) => (
 const EditableFormRow = Form.create()(EditableRow);
 
 @connect(
-  ({ orderman }) => ({
-    orderman
+  ({ product }) => ({
+    product
   }),
   dispatch =>({
   })
@@ -28,8 +31,8 @@ const EditableFormRow = Form.create()(EditableRow);
 //单元格组件
 class EditableCell extends React.Component {
 
-  getInput = (form,dataIndex,record)=> {//input
-       
+  getInput = (form,dataIndex,record)=> {
+  
     }
   render() {
     const {editing,dataIndex,title,inputType,record,index,...restProps } = this.props;
@@ -60,12 +63,11 @@ class EditableCell extends React.Component {
     orderman
   }),
   dispatch =>({
-
-    //发货状态
+     //发货状态
     changeRecommend(data) {
       dispatch({ type: 'orderman/condition', payload: data });
     },
-
+  
   })
 )
 
@@ -79,8 +81,7 @@ class Orderman extends React.Component{
       visible:false,
       selectedRows: [],
       fileList: [],
-      imgUrl1: '',
-      imgUrl2: '',
+
     };
     this.columns = [
       {
@@ -147,15 +148,29 @@ class Orderman extends React.Component{
       },
     ];
   }
-
-
   //发货状态
   changeRecommend = record => {
     const { order_id,is_send} = record;
     this.props.changeRecommend({ order_id,is_send:is_send});
   };
+  showModal = () => {
+    this.setState({
+      visible: true,
+    });
+  }
+
+  handleCancel = (e) => {
+    this.setState({
+      visible: false,
+    });
+  }
+  cancel = () => {
+    this.setState({ editingKey: '' });
+  };
+
+
   //isEditing = this.state.editingKey=record.id
-  isEditing = record => record.order_id === this.state.editingKey;
+  isEditing = record => record.id === this.state.editingKey;
   //点击编辑按钮后 对state里的editingKey 进行修改 editingKey=record.id
   edit(key) {
     this.setState({ editingKey: key });
@@ -191,9 +206,24 @@ class Orderman extends React.Component{
       };
     });
 
+    //点击按钮后输入框的布局
+    const formItemLayout = {
+      //label 标签布局
+      labelCol: {
+        xs: { span: 24 },
+        sm: { span: 7 },
+      },
+      //需要为输入控件设置布局样式时
+      wrapperCol: {
+        xs: { span: 24 },
+        sm: { span: 12 },
+        md: { span: 10 },
+      },
+    };
+
     return (
       <PageHeaderWrapper>
-        <Card bordered={false}>
+        <Card bordered={false}>               
           <EditableContext.Provider value={this.props.form}>
             <Table
               scroll={{x:1300}}

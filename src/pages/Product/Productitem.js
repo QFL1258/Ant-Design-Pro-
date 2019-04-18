@@ -321,7 +321,7 @@ class Product extends React.Component{
     const {list} =this.props.product
     let listid=[]
     list.filter((item)=>{
-          return  listid.push(item.id)
+        return  listid.push(item.id)
     })
   
     form.validateFields((err, fieldsValue) => {
@@ -333,14 +333,14 @@ class Product extends React.Component{
         if (Array.isArray(cover_img)) {
           fieldsValue.cover_img = cover_img[cover_img.length - 1].response.substr(1);
           img_cover_img.push(fieldsValue.cover_img)
+          fieldsValue.cover_img=JSON.stringify(img_cover_img);
         }
         if (Array.isArray(content)) {
           content.forEach(itm => {
             img_content.push(itm.response.substr(1));
+            fieldsValue.content =JSON.stringify(img_content);
           });
         }
-        fieldsValue.content =JSON.stringify(img_content);
-        fieldsValue.cover_img=JSON.stringify(img_cover_img);
         this.props.postProduct(fieldsValue);
         this.setState({visible: false,});
       }else{
@@ -386,14 +386,14 @@ class Product extends React.Component{
       if (Array.isArray(cover_img)) {  
         row.cover_img = cover_img[cover_img.length - 1].response.substr(1);
         img_cover_img.push(row.cover_img )
+        row.cover_img=JSON.stringify(img_cover_img);
       }
       if (Array.isArray(content)) {
         content.forEach(itm => {
           img_content.push(itm.response.substr(1));
+          row.content =JSON.stringify(img_content);
         });
       }
-      row.content =JSON.stringify(img_content);
-      row.cover_img=JSON.stringify(img_cover_img);
       const params = row;
       this.props.editList(params, key * 1);
       this.setState({ editingKey: '' });

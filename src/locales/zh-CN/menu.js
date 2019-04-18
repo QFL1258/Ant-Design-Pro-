@@ -15,7 +15,7 @@ export default {
     //员工管理
    'menu.management':'员工管理',
     //员工管理
-   'menu.carousel':'轮播信息',
+   'menu.carousel':'轮播栏',
     //管理员
    'menu.administrator':'管理员',
     //订单管理

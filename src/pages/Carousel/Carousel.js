@@ -44,66 +44,32 @@ class EditableCell extends React.Component {
     if (info.file.status === 'done') {
       this.setState({
         imageUrl: host_v1 + info.file.response,
-        imgLoading: false,
+        // imgLoading: false,
       });
     }
   };
   getInput = (form,dataIndex,record)=> {
-    if(this.props.title==='封面图'||this.props.title==='详情图'){
-        return form.getFieldDecorator(dataIndex, {
-          getValueFromEvent: this.normFile,
-          initialValue: record[dataIndex],
-          rules: [{
-            required: true,
-            message: ` 请上传${this.props.title}!`,
-          }],
-        })(
-          <Upload name="file"
-                  listType="picture-card"
-                  showUploadList={false}
-                  action={UploadURL}
-                  onChange={this.handleImgChange}
-          >
-            {this.state.imageUrl ? (
-              <img src={this.state.imageUrl} alt="" width="60px" />
-            ) : (
-              <Icon type={this.state.imgLoading ? 'loading' : 'plus'} />
-            )}
-          </Upload>
+      return form.getFieldDecorator(dataIndex, {
+        getValueFromEvent: this.normFile,
+        initialValue: record.cover_img,
+        rules: [{
+          required: true,
+          message: ` 请上传${this.props.title}!`,
+        }],
+      })(
+        <Upload name="file"
+                listType="picture-card"
+                showUploadList={false}
+                action={UploadURL}
+                onChange={this.handleImgChange}
+        >
+          {this.state.imageUrl ? (
+            <img src={this.state.imageUrl} alt="" width="60px" />
+          ) : (
+            <Icon type={this.state.imgLoading ? 'loading' : 'plus'} />
+          )}
+        </Upload>
         );
-      // }else if(this.props.title==='分类名'){
-      //   return form.getFieldDecorator(dataIndex,{
-      //     rules: [{
-      //       required: true,
-      //       message: `Please Input ${this.props.title}!`,
-      //     }],
-      //     initialValue: record.cls.class_id,
-      //   })(
-      //     <Select
-      //     style={{ width: 120 }}
-      //     placeholder={record.name}
-      //     showSearch
-      //     filterOption={(input, option) =>
-      //       option.props.children.toLowerCase().indexOf(input.toLowerCase())>= 0
-      //     }
-      //   >
-      //     {this.props.product.list.map(item => (
-      //       <Select.Option key={item.id} value={item.id}>
-      //         {item.name}
-      //       </Select.Option>
-      //     ))}
-      //   </Select>
-      //     );
-       }
-      else{
-          return form.getFieldDecorator(dataIndex,{
-           rules: [{
-             required: true,
-             message: `请输入${this.props.title}!`,
-           }],
-           initialValue: record[dataIndex],
-         })(<Input />)
-      }
     }
   render() {
     const {editing,dataIndex,title,inputType,record,index,...restProps } = this.props;
@@ -281,14 +247,14 @@ class Carousel extends React.Component{
       if (Array.isArray(cover_img)) {
         fieldsValue.cover_img = cover_img[cover_img.length - 1].response.substr(1);
         img_cover_img.push(fieldsValue.cover_img)
+        fieldsValue.cover_img=JSON.stringify(img_cover_img)
       }
       if (Array.isArray(content)) {
         content.forEach(itm => {
           img_content.push(itm.response.substr(1));
+          fieldsValue.content =JSON.stringify(img_content);
         });
       }
-      fieldsValue.content =JSON.stringify(img_content);
-      fieldsValue.cover_img=JSON.stringify(img_cover_img)
         this.props.postProduct(fieldsValue);
         this.setState({visible: false,});
     });
@@ -328,14 +294,14 @@ class Carousel extends React.Component{
       if (Array.isArray(cover_img)) {  
         row.cover_img = cover_img[cover_img.length - 1].response.substr(1);
         img_cover_img.push(row.cover_img )
+        row.cover_img=JSON.stringify(img_cover_img);
       }
       if (Array.isArray(content)) {
         content.forEach(itm => {
           img_content.push(itm.response.substr(1));
+          row.content =JSON.stringify(img_content);
         });
       }
-      row.content =JSON.stringify(img_content);
-      row.cover_img=JSON.stringify(img_cover_img);
       const params = row;
       this.props.editList(params, key * 1);
       this.setState({ editingKey: '' });
@@ -385,8 +351,6 @@ class Carousel extends React.Component{
         <div className="ant-upload-text">Upload</div>
       </div>
     );
-
-
 
     //点击按钮后输入框的布局
     const formItemLayout = {
@@ -462,7 +426,7 @@ class Carousel extends React.Component{
                     )}
                   </FormItem>
                   {/* class_id */}
-                  <FormItem {...formItemLayout} label="id">
+                  {/* <FormItem {...formItemLayout} label="id">
                     {form.getFieldDecorator('class_id', {
                       rules: [
                         {
@@ -471,7 +435,7 @@ class Carousel extends React.Component{
                         },
                       ],
                     })(<Input placeholder="请输入" />)}
-                  </FormItem>
+                  </FormItem> */}
                 </Form>
             </Modal>
           <EditableContext.Provider value={this.props.form}>
